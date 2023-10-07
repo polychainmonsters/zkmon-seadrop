@@ -29,3 +29,9 @@ __pycache__
 # Use typescript instead of javascript
 *.js
 *.txt
+
+# Jetbrains
+.idea
+
+# OZ
+.openzeppelin/unknown-31337.json

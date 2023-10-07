@@ -1,6 +1,8 @@
-import "@nomiclabs/hardhat-waffle";
+import "@nomiclabs/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import "@nomiclabs/hardhat-etherscan";
+import "@typechain/hardhat";
+import "@nomicfoundation/hardhat-chai-matchers";
 
 module.exports = {
   solidity: {
@@ -18,10 +20,12 @@ module.exports = {
     ],
   },
   networks: {
-    goerli: {
-      url: process.env.RPC_URL_GOERLI,
-      accounts: [process.env.PRIVATE_KEY],
-    },
+    ...(process.env.RPC_URL_GOERLI ? {
+      goerli: {
+        url: process.env.RPC_URL_GOERLI,
+        accounts: [process.env.PRIVATE_KEY],
+      }
+    } : {})
   },
   etherscan: {
     // Your API key for Etherscan
