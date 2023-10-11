@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.17;
 
-import { ERC721PartnerSeaDropUpgradeable } from "./ERC721PartnerSeaDropUpgradeable.sol";
+import { ERC721SeaDropUpgradeable } from "./ERC721SeaDropUpgradeable.sol";
 import { IPoseidonHasher } from "./interfaces/IPoseidonHasher.sol";
 import { ITokenURI } from "./interfaces/ITokenURI.sol";
 
@@ -34,7 +34,7 @@ library zkMonStorage {
  *         an ERC721A token contract that is compatible with SeaDrop.
  *         The set burn address is the only sender that can burn tokens.
  */
-contract zkMon is ERC721PartnerSeaDropUpgradeable {
+contract zkMon is ERC721SeaDropUpgradeable {
     using zkMonStorage for zkMonStorage.Layout;
 
     event MerkleRootVerified(uint256 indexed merkleRoot);
@@ -45,19 +45,16 @@ contract zkMon is ERC721PartnerSeaDropUpgradeable {
     error BurnIncorrectSender();
 
     /**
-     * @notice Initialize the token contract with its name, symbol,
-     *         administrator, and allowed SeaDrop addresses.
+     * @notice Initialize the token contract with its name, symbol, and allowed SeaDrop addresses.
      */
     function initialize(
         string memory name,
         string memory symbol,
-        address administrator,
         address[] memory allowedSeaDrop
     ) external initializer initializerERC721A {
-        ERC721PartnerSeaDropUpgradeable.__ERC721PartnerSeaDrop_init(
+        ERC721SeaDropUpgradeable.__ERC721SeaDrop_init(
             name,
             symbol,
-            administrator,
             allowedSeaDrop
         );
     }

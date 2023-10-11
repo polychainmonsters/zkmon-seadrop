@@ -66,7 +66,7 @@ describe("zkMon", function () {
       "zkMon",
       owner
     );
-    zkMon = await upgrades.deployProxy(zkMonFactory, ["zkMon", "ZKMON", admin.address, [
+    zkMon = await upgrades.deployProxy(zkMonFactory, ["zkMon", "ZKMON", [
       await seadrop.getAddress(),
     ]]);
   });
