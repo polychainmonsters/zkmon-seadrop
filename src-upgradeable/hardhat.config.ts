@@ -4,7 +4,7 @@ import "@nomicfoundation/hardhat-ethers";
 import "@openzeppelin/hardhat-upgrades";
 import "@nomicfoundation/hardhat-chai-matchers";
 require('dotenv').config({
-  path: `${__dirname}/.env`
+  path: `${__dirname}/../.env`
 });
 
 module.exports = {
