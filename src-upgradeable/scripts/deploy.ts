@@ -2,24 +2,23 @@ import fs from "fs";
 import { ethers, upgrades } from "hardhat";
 
 async function mainDeploy() {
-  const ExampleToken = await ethers.getContractFactory("ExampleToken");
+  const ZKMon = await ethers.getContractFactory("zkMon");
   console.log("Deploying...");
-  const exampleToken = await upgrades.deployProxy(
-    ExampleToken,
+  const zkMon = await upgrades.deployProxy(
+    ZKMon,
     [
-      "ExampleToken",
-      "ExTkn",
-      "0x4468A5B725E2C63056131121cD33b66848E1dd87",
+      "zkMon",
+      "ZKMON",
       ["0x00005EA00Ac477B1030CE78506496e8C2dE24bf5"],
     ],
-    { initializer: "initialize" }
+    { initializer: "initialize", timeout: 600000 }
   );
-  await exampleToken.deployed();
+  // await zkMon.deployed();
   const addresses = {
-    proxy: exampleToken.address,
-    admin: await upgrades.erc1967.getAdminAddress(exampleToken.address),
+    proxy: await zkMon.getAddress(),
+    admin: await upgrades.erc1967.getAdminAddress(await zkMon.getAddress()),
     implementation: await upgrades.erc1967.getImplementationAddress(
-      exampleToken.address
+      await zkMon.getAddress()
     ),
   };
   console.log("Addresses: ", addresses);
